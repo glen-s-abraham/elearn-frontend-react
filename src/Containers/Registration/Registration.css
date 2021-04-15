@@ -1,0 +1,85 @@
+.Registration{
+	background-color: white;
+	width:400px;
+	height: 500px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	box-shadow: 0px 0.6px 4px;
+	display: flex;
+	flex-flow: column;
+}
+
+.Login{
+	background-color: white;
+	width:400px;
+	height: 300px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	box-shadow: 0px 0.6px 4px;
+	display: flex;
+	flex-flow: column;
+}
+.Login h2,
+.Registration h2{
+	margin-left:2%;
+	padding: 1px;
+}
+
+.FormControl{
+	display: flex;
+	flex-flow: row;
+	width: 96%;
+	height:60px;
+	margin-left: 5%;
+}
+.TextBox{
+	width:70%;
+	height: 60%;
+	font-size: 22px;
+	font-style: bold;
+	border:0.8px solid black;
+	box-shadow: none;
+	
+}
+.SelectBox{
+	width:71%;
+	height: 66%;
+	font-size: 22px;
+	font-style: bold;
+	border:0.8px solid black;
+	box-shadow: none;
+	
+}
+.LabelBox{
+	width:22%;
+	height: 40px;
+	font-size: 18px;
+	background-color: black;
+	color: white;
+	text-align: center;
+}
+.icon{
+	margin-top: 5%;
+}
+.ButtonPrimary{
+	background-color: #2c8d29;
+	border: 1px solid black;
+	width: 120px;
+	height:60px;
+	font-size: 22px;
+	margin-right: 4px;
+
+}
+.ButtonSecondary{
+	background-color: white;
+	border: 1px solid #2c8d29;
+	width: 120px;
+	height: 60px;
+	font-size: 22px;
+	margin-right: 4px;
+	
+}
