@@ -1,0 +1,37 @@
+.Submit{
+	width:90%;
+	height: 80vh;
+	background-color:#ffffff;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	display: flex;
+	flex-flow: column;
+}
+.Question{
+	width: 90%;	
+	margin-left: 5%;
+
+}
+.UploadBar
+{
+	width: 90%;
+	height: 40px;
+	margin-left: 5%;
+}
+.ButtonPrimary{
+	background-color: #2c8d29;
+	border: 1px solid black;
+	width: 120px;
+	height:60px;
+	font-size: 22px;
+	margin-right: 4px;
+	cursor: pointer;
+
+}
+.FileUpload{
+	margin:10px;
+	margin-bottom: 40px;
+	font-size: 18px;
+}

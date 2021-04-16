@@ -1,0 +1,24 @@
+.Threads
+{
+	padding: 2px;
+	width: 28%;
+	height: 100vh;
+	background-color: white;
+	overflow-y: scroll;
+	position: absolute;
+	top:5%;
+
+}
+.Threads::-webkit-scrollbar
+{
+
+	width: 12px;
+	background-color: black;
+
+}
+.Threads::-webkit-scrollbar-thumb
+{
+	
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
+}
