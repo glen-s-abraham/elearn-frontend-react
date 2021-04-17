@@ -13,6 +13,10 @@
 	background: url('../../assets/default.jpg');
 	background-size: contain;
 }
+.CourseImage img{
+	width:100%;
+	height: 100%;
+}
 .CourseTitle{
 	width: 95%;
 	height: 20%;
