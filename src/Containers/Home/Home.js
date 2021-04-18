@@ -8,7 +8,7 @@ class Home extends Component{
 	componentDidMount()
 	{
 		const AuthToken=localStorage.getItem('AuthToken')
-		if(AuthToken)
+		
 		if(AuthToken)
 		{
 			axios.get('http://127.0.0.1:8000/api/courses/',{headers:{'Authorization':`token ${AuthToken}`}})
@@ -19,6 +19,10 @@ class Home extends Component{
 			.catch(err=>{
 				console.log(err);
 			});
+		}
+		else
+		{
+			window.location.href="/login";
 		}
 	}
 	render()

@@ -1,32 +1,53 @@
 import React,{Component} from 'react';
 import './Course.css';
-import Player from '../../Components/Player/Player';
 import Aux from '../../hoc/ReactAux/ReactAux';
+import axios from 'axios';
 class Course extends Component{
-
+	state={lessons:[]};
+	componentDidMount()
+	{
+		const AuthToken=localStorage.getItem('AuthToken')
+		
+		if(AuthToken)
+		{
+			console.log(this.props.match.params.id);
+			axios.get("http://127.0.0.1:8000/api/lessons/?cid="+this.props.match.params.id,{headers:{'Authorization':`token ${AuthToken}`}})
+			.then(response=>{
+				this.setState({lessons:response.data});
+				
+				
+			})
+			.catch(err=>{
+				console.log(err);
+			});
+		}
+		else{
+			window.location.href="/login";
+		}
+	}
 	render()
 	{
+		const lessons=this.state.lessons.map(lesson=>{
+			return(<span className="Lesson"  onClick={()=>{
+				const player=document.querySelector('#video-player')
+				player.src=lesson.lesson
+				
+			}}>
+			{lesson.lessonname}
+			</span>);
+		})
+
+
 		return(
 			<Aux>
 			<div className='Course'>
-				<Player/>
+				<video id="video-player" className="Player" controls>
+					
+				</video>
 			</div>
 			<div className="Lessons">
-				<span className="Lesson">1.lesson</span>
-				<span className="Lesson">2.lesson</span>
-				<span className="Lesson">3.lesson</span>
-				<span className="Lesson">4.lesson</span>
-				<span className="Lesson">5.lesson</span>
-				<span className="Lesson">1.lesson</span>
-				<span className="Lesson">2.lesson</span>
-				<span className="Lesson">3.lesson</span>
-				<span className="Lesson">4.lesson</span>
-				<span className="Lesson">5.lesson</span>
-				<span className="Lesson">1.lesson</span>
-				<span className="Lesson">2.lesson</span>
-				<span className="Lesson">3.lesson</span>
-				<span className="Lesson">4.lesson</span>
-				<span className="Lesson">5.lesson</span>
+				
+				{lessons}
 			</div>
 			</Aux>
 
