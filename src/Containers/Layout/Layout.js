@@ -46,7 +46,7 @@ class Layout extends Component{
 				<Route path="/course/:id"  component={Course}/>
 				<Route path="/assignment"  component={Assignment}/>
 				<Route path="/forum"  component={Forum}/>
-				<Route path="/submit/:id"  component={Submit}/>
+				<Route path="/submit/:status/:id"  component={Submit}/>
 				<Route path="/User" exact component={User}/>
 				<Route path="/Registration" exact component={Registration}/>
 				<Route path="/login" exact component={Login}/>	

@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import './Assignment.css';
+import axios from 'axios'
 class Assignment extends Component{
 	state={
 		assignments:[]
@@ -8,11 +9,30 @@ class Assignment extends Component{
 	constructor()
 	{
 		super();
-		this.state={assignments:[{"id":1,"topic":"pending 1"},{"id":2,"topic":"pending 2"}]};	
+		this.state={status:'pending'};	
 	}
 
 	componentDidMount(){
-		console.log("component Up");
+		const AuthToken=localStorage.getItem('AuthToken')
+		
+		if(AuthToken)
+		{
+
+			
+			axios.get("http://127.0.0.1:8000/api/assignments/pending/",{headers:{'Authorization':`token ${AuthToken}`}})
+			.then(response=>{
+				
+				this.setState({assignments:response.data});
+				
+				
+			})
+			.catch(err=>{
+				console.log(err);
+			});
+		}
+		else{
+			window.location.href="/login";
+		}
 		
 		}
 	tabClickedHandler=(id)=>{
@@ -27,13 +47,38 @@ class Assignment extends Component{
 		el.classList.add('Active');
 		let div=document.querySelector('.TabContent');
 		let content="";
+		const AuthToken=localStorage.getItem('AuthToken')
+		if(AuthToken){
 		if(id=="Pending")
 		{	
-			this.setState({assignments:[{"id":1,"topic":"pending 1"},{"id":2,"topic":"pending 2"}]});
+			
+			axios.get("http://127.0.0.1:8000/api/assignments/pending/",{headers:{'Authorization':`token ${AuthToken}`}})
+			.then(response=>{
+				
+				this.setState({status:'pending',assignments:response.data});
+				
+				
+			})
+			.catch(err=>{
+				console.log(err);
+			});
 		}
 		else if(id=="Submitted")
 		{	
-			this.setState({assignments:[{"id":1,"topic":"submitted 1"},{"id":2,"topic":"submitted 2"}]});	
+			const AuthToken=localStorage.getItem('AuthToken')
+			
+			axios.get("http://127.0.0.1:8000/api/assignments/completed/",{headers:{'Authorization':`token ${AuthToken}`}})
+			.then(response=>{
+				
+				this.setState({status:'completed',assignments:response.data});
+				
+				
+			})
+			.catch(err=>{
+				console.log(err);
+			});
+
+		}
 		}	
 		
 		
@@ -41,15 +86,17 @@ class Assignment extends Component{
 	}
 	render()
 	{
-
-		const content=this.state.assignments.map(el=>{
+		let content="Loading.."
+		if(this.state.assignments){
+			content=this.state.assignments.map(el=>{
 			
-			return (
-				<Link to={"/submit/"+el.id}>
-					<h2>{el.topic}</h2>
-				</Link>	
-				);
-		});
+				return (
+					<Link to={"/submit/"+this.state.status+"/"+el.id}>
+						<h2>{el.topic}</h2>
+					</Link>	
+					);
+			});
+		}
 		return(
 
 				<div className="Assignment">
