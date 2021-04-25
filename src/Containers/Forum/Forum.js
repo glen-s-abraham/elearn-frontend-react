@@ -5,15 +5,10 @@ import axios from 'axios';
 
 class Forum extends Component{
 	state={threads:[]}
-	componentDidMount(){
 
+	fetchThreads(){
 		const AuthToken=localStorage.getItem('AuthToken')
-		
-		if(AuthToken)
-		{
-
-			
-			axios.get("http://127.0.0.1:8000/api/community/threads/",{headers:{'Authorization':`token ${AuthToken}`}})
+		axios.get("http://127.0.0.1:8000/api/community/threads/",{headers:{'Authorization':`token ${AuthToken}`}})
 			.then(response=>{
 				
 				this.setState({threads:response.data});
@@ -23,6 +18,16 @@ class Forum extends Component{
 			.catch(err=>{
 				console.log(err);
 			});
+	}
+	componentDidMount(){
+
+		const AuthToken=localStorage.getItem('AuthToken')
+		
+		if(AuthToken)
+		{
+
+			this.fetchThreads()
+			
 		}
 		else{
 			window.location.href="/login";
@@ -77,6 +82,29 @@ class Forum extends Component{
 			document.querySelector("#commentBox").value="";
 		}
 	}
+	toggleHiddenHandler=()=>{
+		document.querySelector(".Modal").classList.toggle("Hide");
+		document.querySelector(".ThreadForm").classList.toggle("Hide");
+	}
+	threadCreateHandler=()=>{
+		const subject=document.querySelector("#subject").value;
+		const descreption=document.querySelector("#descreption").value;
+		const data={'subject':subject,'descreption':descreption,'author':1};
+		const AuthToken=localStorage.getItem('AuthToken');
+		axios.post("http://127.0.0.1:8000/api/community/threads/",data,{headers:{'Authorization':`token ${AuthToken}`}})
+			.then(response=>{
+				
+				
+				this.fetchThreads()
+				this.toggleHiddenHandler();
+				
+			})
+			.catch(err=>{
+				console.log(err);
+			});
+		document.querySelector("#subject").value="";	
+		document.querySelector("#descreption").value="";
+	}
 	render(){
 		let content=(<h1>Loading..</h1>);
 		let replies='';
@@ -97,8 +125,27 @@ class Forum extends Component{
 		}	
 		return(
 			<Aux>
-				<div className="Threads">
+
+				<div className="ThreadForm Hide">
+					<h2 className="ThreadTitle">Create Thread</h2>
+						<label className="Label">Topic</label>	
+						<input id="subject" type="text" className="Text" placeholder="Enter Topic"/>
+						<label className="Label">Descreption</label>
+						<input id="descreption" type="text" className="Descreption" />
+						<div>
+							<button className="Button" onClick={()=>{this.threadCreateHandler()}}>Create</button>
+							<button className="Cancel" onClick={()=>{this.toggleHiddenHandler()}}>Cancel</button>
+						</div>
+				</div>
+
+				<div className="Modal Hide" onClick={()=>{this.toggleHiddenHandler()}}>
+				</div>
+				
+				<div className="Threads" >
+					<div className="ThreadHeader">
 					<h1>Threads</h1>
+					<button onClick={()=>{this.toggleHiddenHandler()}} className="ThreadCreate">+</button>
+					</div>
 					{content}
 				</div>
 				<div className="Discussions">
@@ -112,6 +159,7 @@ class Forum extends Component{
 						<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M4.01 6.03l7.51 3.22-7.52-1 .01-2.22m7.5 8.72L4 17.97v-2.22l7.51-1M2.01 3L2 10l15 2-15 2 .01 7L23 12 2.01 3z"/></svg>
 					</button>
 				</div>
+				
 			</Aux>
 		);	
 	}
