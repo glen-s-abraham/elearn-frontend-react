@@ -11,12 +11,12 @@
 .Logo{
 	width: 40px;
 	height:40px;
-	margin-left: 40px;
+	margin-left: 4%;
 }
 .NavLinks{
 	
-	margin-left: 1000px;
-	margin-top: 4px;
+	margin-left:70%;
+	margin-top: 0.4%;
 
 
 }
@@ -40,4 +40,22 @@
 
 .active{
 	fill:#2c8d29;
+}
+@media (max-width:400px) 
+{
+.NavLinks{
+	
+	margin-left:10%;
+	margin-top: 1.5%;
+
+}
+}
+@media (min-width:401px) and (max-width: 500px)
+{
+	.NavLinks{
+	
+	margin-left:28%;
+	margin-top: 0.4%;
+
+}
 }

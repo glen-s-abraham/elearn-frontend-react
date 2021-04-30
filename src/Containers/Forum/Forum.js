@@ -33,6 +33,7 @@ class Forum extends Component{
 			window.location.href="/login";
 		}
 
+
 	}
 	threadDisplayHandler=(id)=>{
 		
@@ -57,6 +58,10 @@ class Forum extends Component{
 			.catch(err=>{
 				console.log(err);
 			});
+			if(window.innerWidth<500)
+			{
+				document.querySelector(".Threads").classList.add("Hide");
+			}
 
 	}
 	postReplyHandler=()=>{
@@ -105,17 +110,23 @@ class Forum extends Component{
 		document.querySelector("#subject").value="";	
 		document.querySelector("#descreption").value="";
 	}
+	unhideThreadsHandler=()=>{
+		if(window.innerWidth<500)
+			{
+				document.querySelector(".Threads").classList.remove("Hide");
+			}
+	}
 	render(){
 		let content=(<h1>Loading..</h1>);
 		let replies='';
 		let topic='';
  		if(this.state.threads)
 		{
-			content=this.state.threads.map(el=>{return(<a className="ThreadsLink" onClick={()=>{this.threadDisplayHandler((el.id))}} href="#">{el.subject}</a>)});
+			content=this.state.threads.map(el=>{return(<a className="ThreadsLink" onClick={()=>{this.threadDisplayHandler((el.id))}} href="#">{el.subject}<hr/></a>)});
 			
 		}
 		if(this.state.thread){
-				topic=(<div className="Topic"><h1>{this.state.thread.subject}</h1><p>{this.state.thread.descreption}</p></div>);
+				topic=(<div className="Topic"><a className="Back" onClick={()=>{this.unhideThreadsHandler()}} href="#"> {"<"} </a><h1>{this.state.thread.subject}</h1><p>{this.state.thread.descreption}</p></div>);
 		}
 		if(this.state.replies)
 		{

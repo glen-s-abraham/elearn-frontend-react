@@ -83,3 +83,13 @@
 	margin-right: 4px;
 	
 }
+@media (max-width:500px) 
+{
+	.Registration{
+		width:90%;
+	}
+	.Login{
+		
+		width:90%;
+	}
+}

@@ -31,7 +31,14 @@
 	margin: 8px;
 	display: block;
 	font-size: 18px;
+	text-decoration: none;
+	color: black;
 }
+hr{
+	height: 1px;
+	color: #2c8d29;
+}
+
 .Threads::-webkit-scrollbar
 {
 
@@ -158,6 +165,18 @@
 	box-shadow: none;
 
 }
+.Back
+{
+	text-decoration: none;
+	font-size: 36px;
+	color: black;
+	display: none;
+}
+.Back:hover,
+.Back:active
+{
+	color: #555;
+}
 .Descreption{
 	width: 90%;
 	margin-left: 4%;
@@ -185,6 +204,42 @@
 	height: 60px;
 	font-size: 22px;
 	cursor: pointer;
-	margin-left: 4%;
+	margin-left: 2.8px;
+	
 	margin-top: 16px;
+}
+@media (max-width:500px) 
+{
+	.Threads{
+		width:100%;
+		z-index:500;
+		top:8%;
+
+	}
+	.ThreadForm{
+		width:90%;
+	}
+	.Discussions{
+		width: 100%;
+		left:0%;
+	}
+	.Topic{
+		width: 94%;
+		margin-left: 0%;
+		padding: 10px;
+	
+
+	}
+	.Reply{
+		width: 94%;
+		margin-left:0;
+		
+	}
+	.CommentBar{
+		left:0;
+		width: 100%;
+	}
+	.Back{
+		display: block;
+	}
 }

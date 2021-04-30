@@ -9,3 +9,23 @@
 
 
 }
+@media (max-width:400px) 
+{
+	.Home{
+	
+	left: 4%;
+	top:12%;
+
+
+}
+}
+@media (min-width:401px) and (max-width: 500px)
+{
+	.Home{
+	
+	left: 20%;
+	top:12%;
+
+
+}
+}

@@ -54,3 +54,18 @@
 	width: 100%;
 	height: 100%;
 }
+@media (max-width:500px) 
+{
+	.Lessons
+	{
+		
+		left: 3%;
+		top:52%;
+		width: 94%;
+		height: 40%;
+	}
+	.Course{
+		width: 94%;
+		height: 40%;
+	}
+}
