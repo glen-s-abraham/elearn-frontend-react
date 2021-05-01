@@ -11,6 +11,7 @@ class Home extends Component{
 		
 		if(AuthToken)
 		{
+			
 			axios.get('http://127.0.0.1:8000/api/courses/',{headers:{'Authorization':`token ${AuthToken}`}})
 			.then(response=>{
 				this.setState({courses:response.data});

@@ -14,30 +14,8 @@ import {Route} from 'react-router-dom';
 import axios from 'axios';
 
 class Layout extends Component{
-	constructor()
-	{
-		super();
-		const AuthToken=localStorage.getItem('AuthToken')
-		if(AuthToken)
-		{
-			console.log(AuthToken);
-			this.state={loggedIn:true,Token:AuthToken}
-
-		}
-		else
-		{
-			this.state={loggedIn:false}
-		}	
-
-	}
 	
-	render(){
-		if(this.state.loggedIn==false)
-		{
-			return(
-				<Route path="/login" exact component={Login}/>	
-			);
-		}
+		render(){
 		return(
 		<Aux>
 			<div>

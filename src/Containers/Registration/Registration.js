@@ -34,6 +34,7 @@ class Registration extends Component{
 
 
 	}
+
 	render()
 	{
 		return(
@@ -88,7 +89,9 @@ class Registration extends Component{
 					<div className="FormControl">
 						<input type="button" className="ButtonPrimary" value="Submit" onClick={()=>{this.formHandler()}}/>
 						<input type="reset" className="ButtonSecondary"/>
+						
 					</div>
+					<a href="/login">If Already A member go to Login</a>
 					</form>
 				</div>
 			);

@@ -10,6 +10,10 @@
 	display: flex;
 	flex-flow: column;
 }
+.Registration a{
+	margin-left: 5%;
+	margin-top: 5%;
+}
 
 .Login{
 	background-color: white;

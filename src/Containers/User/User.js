@@ -57,6 +57,10 @@ class User extends Component{
 			});
 		
 	}
+	logoutHandler=()=>{
+		localStorage.removeItem("AuthToken");
+		window.location.href="/login";
+	}
 	render()
 	{
 		
@@ -115,6 +119,7 @@ class User extends Component{
 				
 					<div className="FormControl">
 						<input type="button" className="ButtonPrimary" value="Update" onClick={()=>{this.profileUpdateHandler()}}/>
+						<input type="button" className="ButtonSecondary" value="LogOut" onClick={()=>{this.logoutHandler()}}/>
 						
 					</div>
 					</form>	

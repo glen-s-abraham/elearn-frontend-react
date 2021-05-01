@@ -32,6 +32,9 @@ class Login extends Component{
 
 
 	}
+	registrationClickedHandler=()=>{
+		window.location.href="/registration";
+	}
 	render()
 	{
 		return(
@@ -54,6 +57,7 @@ class Login extends Component{
 					</div>
 					<div className="FormControl">
 						<input type="button" className="ButtonPrimary" value="Login" onClick={()=>{this.formHandler()}}/>
+						<input type="button" className="ButtonSecondary" value="Register" onClick={()=>{this.registrationClickedHandler()}}/>
 						
 					</div>
 					</form>

@@ -24,6 +24,8 @@
 	width: 40px;
 	height:40px;
 	cursor: pointer;
+	box-shadow: none;
+	border:none;
 	
 }
 .ThreadsLink{
@@ -35,7 +37,7 @@
 	color: black;
 }
 hr{
-	height: 1px;
+	
 	color: #2c8d29;
 }
 
