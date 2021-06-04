@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import '../Registration/Registration.css';
-import axios from 'axios';
+import axios from '../../axios/axios';
 class User extends Component{
 	state={profile:null}
 	fetch=()=>{
@@ -10,7 +10,7 @@ class User extends Component{
 		{
 
 			
-			axios.get("http://127.0.0.1:8000/api/users/Profiles/",{headers:{'Authorization':`token ${AuthToken}`}})
+			axios.get("users/Profiles/",{headers:{'Authorization':`token ${AuthToken}`}})
 			.then(response=>{
 				
 				this.setState({profile:response.data});
@@ -44,7 +44,7 @@ class User extends Component{
 			'semester':semester
 		};
 		const AuthToken=localStorage.getItem('AuthToken');
-		axios.patch("http://127.0.0.1:8000/api/users/Profiles/"+data.id+"/",data,{headers:{'Authorization':`token ${AuthToken}`}})
+		axios.patch("users/Profiles/"+data.id+"/",data,{headers:{'Authorization':`token ${AuthToken}`}})
 			.then(response=>{
 				
 				this.fetch();

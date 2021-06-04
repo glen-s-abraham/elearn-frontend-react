@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import './Submit.css';
-import axios from 'axios';
+import axios from '../../axios/axios';
 class Submit extends Component{
 	state={assignment:[]}
 	componentDidMount(){
@@ -10,7 +10,7 @@ class Submit extends Component{
 		if(AuthToken)
 		{
 			
-			axios.get("http://127.0.0.1:8000/api/assignments/"+this.props.match.params.status+"/"+this.props.match.params.id+"/",{headers:{'Authorization':`token ${AuthToken}`}})
+			axios.get("assignments/"+this.props.match.params.status+"/"+this.props.match.params.id+"/",{headers:{'Authorization':`token ${AuthToken}`}})
 			.then(response=>{
 				
 				this.setState({assignment:response.data});
@@ -32,7 +32,7 @@ class Submit extends Component{
 		formData.append('aid',document.querySelector("#aid").value);
 		formData.append('file',document.querySelector("#file").files[0]);
 		const AuthToken=localStorage.getItem('AuthToken')
-		axios.post("http://127.0.0.1:8000/api/assignments/submissions/",formData,{headers:{'Authorization':`token ${AuthToken}`}})
+		axios.post("assignments/submissions/",formData,{headers:{'Authorization':`token ${AuthToken}`}})
 			.then(response=>{
 				
 				

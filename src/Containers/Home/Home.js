@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import './Home.css'
 import CourseCard from '../../Components/CourseCard/CourseCard';
 import {Link} from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../axios/axios';
 class Home extends Component{
 	state={courses:[]};
 	componentDidMount()
@@ -12,7 +12,7 @@ class Home extends Component{
 		if(AuthToken)
 		{
 			
-			axios.get('http://127.0.0.1:8000/api/courses/',{headers:{'Authorization':`token ${AuthToken}`}})
+			axios.get('courses/',{headers:{'Authorization':`token ${AuthToken}`}})
 			.then(response=>{
 				this.setState({courses:response.data});
 				

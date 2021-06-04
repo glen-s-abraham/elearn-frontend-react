@@ -1,14 +1,14 @@
 import React,{Component} from 'react';
 import Aux from '../../hoc/ReactAux/ReactAux';
 import './Forum.css';
-import axios from 'axios';
+import axios from '../../axios/axios';
 
 class Forum extends Component{
 	state={threads:[]}
 
 	fetchThreads(){
 		const AuthToken=localStorage.getItem('AuthToken')
-		axios.get("http://127.0.0.1:8000/api/community/threads/",{headers:{'Authorization':`token ${AuthToken}`}})
+		axios.get("community/threads/",{headers:{'Authorization':`token ${AuthToken}`,'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}})
 			.then(response=>{
 				
 				this.setState({threads:response.data});
@@ -38,7 +38,7 @@ class Forum extends Component{
 	threadDisplayHandler=(id)=>{
 		
 		const AuthToken=localStorage.getItem('AuthToken');
-		axios.get("http://127.0.0.1:8000/api/community/threads/"+id+"/",{headers:{'Authorization':`token ${AuthToken}`}})
+		axios.get("community/threads/"+id+"/",{headers:{'Authorization':`token ${AuthToken}`}})
 			.then(response=>{
 				
 				this.setState({thread:response.data});
@@ -48,7 +48,7 @@ class Forum extends Component{
 			.catch(err=>{
 				console.log(err);
 			});
-		axios.get("http://127.0.0.1:8000/api/community/replies/?tid="+id,{headers:{'Authorization':`token ${AuthToken}`}})
+		axios.get("community/replies/?tid="+id,{headers:{'Authorization':`token ${AuthToken}`}})
 			.then(response=>{
 				
 				this.setState({replies:response.data});
@@ -71,8 +71,9 @@ class Forum extends Component{
 			if(content)
 			{
 				const data={'thread':id,'reply':content,'author':1}
+				console.log(data);
 				const AuthToken=localStorage.getItem('AuthToken');
-				axios.post("http://127.0.0.1:8000/api/community/replies/",data,{headers:{'Authorization':`token ${AuthToken}`}})
+				axios.post("community/replies/",data,{headers:{'Authorization':`token ${AuthToken}`}})
 				.then(response=>{
 					
 					this.setState({thread:response.data});
@@ -92,11 +93,17 @@ class Forum extends Component{
 		document.querySelector(".ThreadForm").classList.toggle("Hide");
 	}
 	threadCreateHandler=()=>{
+		let data=new FormData()
 		const subject=document.querySelector("#subject").value;
 		const descreption=document.querySelector("#descreption").value;
-		const data={'subject':subject,'descreption':descreption,'author':1};
+		data.append('author',1);
+		data.append('subject',subject);
+		data.append('descreption',descreption)
+		
+
 		const AuthToken=localStorage.getItem('AuthToken');
-		axios.post("http://127.0.0.1:8000/api/community/threads/",data,{headers:{'Authorization':`token ${AuthToken}`}})
+		
+		axios.post("community/threads/",data,{headers:{'Authorization':`token ${AuthToken}`}})
 			.then(response=>{
 				
 				

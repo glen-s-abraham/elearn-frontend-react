@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import './Registration.css';
-import axios from 'axios';
+import axios from '../../axios/axios';
 class Login extends Component{
 	formHandler=()=>{
 		
@@ -14,7 +14,7 @@ class Login extends Component{
 
 		}
 		console.log(data);
-		axios.post('http://127.0.0.1:8000/api/users/Login/',data)
+		axios.post('users/Login/',data)
 		.then(response=>
 		{
 			

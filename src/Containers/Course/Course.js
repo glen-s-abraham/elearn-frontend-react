@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import './Course.css';
 import Aux from '../../hoc/ReactAux/ReactAux';
-import axios from 'axios';
+import axios from '../../axios/axios';
 class Course extends Component{
 	state={lessons:[]};
 	componentDidMount()
@@ -11,7 +11,7 @@ class Course extends Component{
 		if(AuthToken)
 		{
 			console.log(this.props.match.params.id);
-			axios.get("http://127.0.0.1:8000/api/lessons/?cid="+this.props.match.params.id,{headers:{'Authorization':`token ${AuthToken}`}})
+			axios.get("lessons/?cid="+this.props.match.params.id,{headers:{'Authorization':`token ${AuthToken}`}})
 			.then(response=>{
 				this.setState({lessons:response.data});
 				

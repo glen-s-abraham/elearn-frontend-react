@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import './Assignment.css';
-import axios from 'axios'
+import axios from '../../axios/axios';
 class Assignment extends Component{
 	state={
 		assignments:[]
@@ -19,7 +19,7 @@ class Assignment extends Component{
 		{
 
 			
-			axios.get("http://127.0.0.1:8000/api/assignments/pending/",{headers:{'Authorization':`token ${AuthToken}`}})
+			axios.get("assignments/pending/",{headers:{'Authorization':`token ${AuthToken}`}})
 			.then(response=>{
 				
 				this.setState({assignments:response.data});
@@ -52,7 +52,7 @@ class Assignment extends Component{
 		if(id=="Pending")
 		{	
 			
-			axios.get("http://127.0.0.1:8000/api/assignments/pending/",{headers:{'Authorization':`token ${AuthToken}`}})
+			axios.get("assignments/pending/",{headers:{'Authorization':`token ${AuthToken}`}})
 			.then(response=>{
 				
 				this.setState({status:'pending',assignments:response.data});
@@ -67,7 +67,7 @@ class Assignment extends Component{
 		{	
 			const AuthToken=localStorage.getItem('AuthToken')
 			
-			axios.get("http://127.0.0.1:8000/api/assignments/completed/",{headers:{'Authorization':`token ${AuthToken}`}})
+			axios.get("assignments/completed/",{headers:{'Authorization':`token ${AuthToken}`}})
 			.then(response=>{
 				
 				this.setState({status:'completed',assignments:response.data});

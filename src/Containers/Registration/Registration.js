@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import './Registration.css';
-import axios from 'axios';
+import axios from '../../axios/axios';
 import {Redirect} from 'react-router-dom';
 class Registration extends Component{
 	formHandler=()=>{
@@ -19,7 +19,7 @@ class Registration extends Component{
 
 		}
 		
-		axios.post('http://127.0.0.1:8000/api/users/Profiles/',data)
+		axios.post('users/Profiles/',data)
 		.then(response=>
 		{
 			window.location.href="/login";
