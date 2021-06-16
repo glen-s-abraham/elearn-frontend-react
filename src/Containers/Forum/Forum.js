@@ -4,7 +4,7 @@ import './Forum.css';
 import axios from '../../axios/axios';
 
 class Forum extends Component{
-	state={threads:[]}
+	state={threads:[],}
 
 	fetchThreads(){
 		const AuthToken=localStorage.getItem('AuthToken')
@@ -12,12 +12,37 @@ class Forum extends Component{
 			.then(response=>{
 				
 				this.setState({threads:response.data});
-				console.log(response.data)
+				
 				
 			})
 			.catch(err=>{
 				console.log(err);
 			});
+	}
+	async getUserId()
+	{
+		const AuthToken=localStorage.getItem('AuthToken')
+		let userId;
+		if(AuthToken)
+		{
+
+			
+			await axios.get("users/Profiles/",{headers:{'Authorization':`token ${AuthToken}`}})
+			.then(response=>{
+
+				userId=response.data[0].id;
+				console.log(response.data[0].id);
+				
+				
+			})
+			.catch(err=>{
+				console.log(err);
+			});
+		}
+		else{
+			window.location.href="/login";
+		}
+		return userId;
 	}
 	componentDidMount(){
 
@@ -42,7 +67,6 @@ class Forum extends Component{
 			.then(response=>{
 				
 				this.setState({thread:response.data});
-				console.log(response.data)
 				
 			})
 			.catch(err=>{
@@ -52,7 +76,7 @@ class Forum extends Component{
 			.then(response=>{
 				
 				this.setState({replies:response.data});
-				console.log(response.data)
+				
 				
 			})
 			.catch(err=>{
@@ -64,20 +88,20 @@ class Forum extends Component{
 			}
 
 	}
-	postReplyHandler=()=>{
+	postReplyHandler=async ()=>{
 		if(this.state.thread){
 			const id=this.state.thread.id;
 			const content=document.querySelector("#commentBox").value;
 			if(content)
 			{
-				const data={'thread':id,'reply':content,'author':1}
+				const userId=await this.getUserId();
+				const data={'thread':id,'reply':content,'author':userId}
 				console.log(data);
 				const AuthToken=localStorage.getItem('AuthToken');
 				axios.post("community/replies/",data,{headers:{'Authorization':`token ${AuthToken}`}})
 				.then(response=>{
 					
 					this.setState({thread:response.data});
-					console.log(response.data)
 					this.threadDisplayHandler(id);
 					
 				})
@@ -92,16 +116,16 @@ class Forum extends Component{
 		document.querySelector(".Modal").classList.toggle("Hide");
 		document.querySelector(".ThreadForm").classList.toggle("Hide");
 	}
-	threadCreateHandler=()=>{
+	threadCreateHandler=async ()=>{
+		const AuthToken=localStorage.getItem('AuthToken');
 		let data=new FormData()
+		const userId=await this.getUserId();
+		console.log(userId);
 		const subject=document.querySelector("#subject").value;
 		const descreption=document.querySelector("#descreption").value;
-		data.append('author',1);
+		data.append('author',userId);
 		data.append('subject',subject);
 		data.append('descreption',descreption)
-		
-
-		const AuthToken=localStorage.getItem('AuthToken');
 		
 		axios.post("community/threads/",data,{headers:{'Authorization':`token ${AuthToken}`}})
 			.then(response=>{
